@@ -5,7 +5,7 @@ const deleteRequest = require("./methods/delete.js");
 //1)Server oluştur
 const server = http.createServer((req, res) => {
     //frontende gönderilecek bütün cevaplara eklenecek ve cors hatasını engelleyecek header
-    res.setHeader("Acces-Control-Allow-Origin")
+    res.setHeader("Access-Control-Allow-Origin", "*");
 
     //istek atılan method türüne göre client 'a cevap vericek fonksiyonu belirledik.module yapısı sayesinde kod kalabalığı ılmaması için ayrı dosyalara tanımladık
     switch (req.method) {

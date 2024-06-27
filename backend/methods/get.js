@@ -20,7 +20,7 @@ module.exports = async (req, res) => {
         return res.end(data);
     } else if (baseUrl === "/api/movies" && id) {
         // 1) Bütün filmleri al JS formatında
-        const data = JSON.parse(fs.readFileSync("./data/movies.json", "utf-8"));
+        const data = JSON.parse(fs.readFileSync("backend/data/movies.json", "utf-8"));
 
         // 2) URL'e eklenen id'ye karşılık gelen filmi dizide bul
         const movie = data.movies.find((movie) => movie.id === id);
