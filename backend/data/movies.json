@@ -36,7 +36,7 @@
       "title": "Spiderman",
       "year": "2023",
       "genre": ["Action"],
-      "rating": "8.7",
+      "rating": "6.2",
       "id": "5de9a66b-e31e-4a1d-b4f9-3fc73b8847ed",
       "image": "https://c4.wallpaperflare.com/wallpaper/1005/535/764/venom-spiderman-hd-4k-wallpaper-preview.jpg"
     },
@@ -47,6 +47,14 @@
       "rating": "8.7",
       "id": "7c7a1674-1f0b-4998-9ed5-0ad6ada599f8",
       "image": "https://c4.wallpaperflare.com/wallpaper/645/556/1001/harry-potter-and-the-deathly-hallows-4k-beautiful-background-wallpaper-preview.jpg"
+    },
+    {
+      "title": "Minions",
+      "year": "2010",
+      "image": "https://c4.wallpaperflare.com/wallpaper/802/413/216/5c1cc10652111-wallpaper-preview.jpg",
+      "id": "yasasinCumhuriyet1923",
+      "rating": "1.1",
+      "genre": ["Animation"]
     }
   ]
 }

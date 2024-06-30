@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ movie, index }) => {
-  const placeholderImage = `https://picsum.photos/500/70${index}`;
-
+  // const placeholderImage = `https://picsum.photos/500/70${index}`;
+  const r = +movie.rating;
+  //console.log(r);
+  const color = r > 9 ? "blue" : r > 7.5 ? "green" : r > 5 ? "orange" : "red";
   return (
     <Link
       to={`/movie/${movie.id}`}
@@ -15,7 +17,10 @@ const Card = ({ movie, index }) => {
           src={movie.image}
           alt="poster"
         />
-        <span className="absolute right-[-10px] bottom-[-10px] font-semibold text-white bg-green-500 rounded-full p-1">
+        <span
+          style={{ background: color }}
+          className="absolute right-[-10px] bottom-[-10px] font-semibold text-white rounded-full p-1"
+        >
           {movie.rating}
         </span>
       </div>
