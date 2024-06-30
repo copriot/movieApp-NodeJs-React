@@ -39,4 +39,4 @@ const server = http.createServer((req, res) => {
 const port = 5005;
 server.listen(port, () => {
     console.log(`Server ${port}'a gelen istekleri dinlemeye basladi`);
-})
+});
