@@ -52,7 +52,23 @@
       "title": "Minions",
       "year": "2010",
       "image": "https://c4.wallpaperflare.com/wallpaper/802/413/216/5c1cc10652111-wallpaper-preview.jpg",
-      "id": "yasasinCumhuriyet1923",
+      "id": "benimID-3",
+      "rating": "1.1",
+      "genre": ["Animation"]
+    },
+    {
+      "title": "Minions",
+      "year": "2010",
+      "image": "https://c4.wallpaperflare.com/wallpaper/802/413/216/5c1cc10652111-wallpaper-preview.jpg",
+      "id": "benimID-4",
+      "rating": "1.1",
+      "genre": ["Animation"]
+    },
+    {
+      "title": "Minions",
+      "year": "2010",
+      "image": "https://c4.wallpaperflare.com/wallpaper/802/413/216/5c1cc10652111-wallpaper-preview.jpg",
+      "id": "benimID-5",
       "rating": "1.1",
       "genre": ["Animation"]
     }

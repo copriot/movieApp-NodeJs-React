@@ -1,5 +1,6 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import api from "../utilities/api";
 import Loader from "../components/Loader";
@@ -13,6 +14,8 @@ import {
 import Error from "../components/Error";
 
 const Detail = () => {
+  const navigate = useNavigate();
+
   // 1) URL'deki parametre olan film idsini al
   const { id } = useParams();
 
@@ -23,6 +26,18 @@ const Detail = () => {
   });
 
   console.log(data);
+  const movie = data?.data;
+
+  const r = +movie?.rating;
+
+  const color = r > 9 ? "blue" : r > 7.5 ? "green" : r > 5 ? "orange" : "red";
+
+  const handleDelete = () => {
+    api
+      .delete(`/movies/${movie?.id}`)
+      .then((res) => navigate("/"))
+      .catch((err) => console.log("hataa", err));
+  };
 
   return (
     <div className="p-10">
@@ -35,7 +50,10 @@ const Detail = () => {
           <div>
             <div className="flex flex-col gap-5 bg-orange-100 p-10 rounded-md">
               <div className="flex justify-end">
-                <button className="bg-red-500 text-white p-2 rounded-md hover:bg-red-700">
+                <button
+                  onClick={handleDelete}
+                  className="bg-red-500 text-white p-2 rounded-md hover:bg-red-700"
+                >
                   <FaTrashCan />
                 </button>
               </div>
@@ -55,9 +73,15 @@ const Detail = () => {
                   <p className="text-green-500 font-semibold">
                     Yıl: {data.year}
                   </p>
-                  <p className="text-blue-700 rounded-full font-semibold ">
-                    Kullanıcı Puanı: {data.rating}
-                  </p>
+                  <span className=" rounded-full font-semibold ">
+                    Kullanıcı Puanı:
+                    <p
+                      className=" m-2 inline-block rounded-lg p-1 text-white"
+                      style={{ background: color }}
+                    >
+                      {data.rating}
+                    </p>
+                  </span>
                   <p className="text-yellow-700 font-semibold">
                     Kategoriler: {data.genre.join("-")}
                   </p>

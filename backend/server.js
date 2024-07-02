@@ -6,33 +6,51 @@ const deleteRequest = require("./methods/delete.js");
 const server = http.createServer((req, res) => {
     //frontende gönderilecek bütün cevaplara eklenecek ve cors hatasını engelleyecek header
     res.setHeader("Access-Control-Allow-Origin", "*");
-
+    console.log(res, "😀")
     //istek atılan method türüne göre client 'a cevap vericek fonksiyonu belirledik.module yapısı sayesinde kod kalabalığı ılmaması için ayrı dosyalara tanımladık
     switch (req.method) {
+        // frontend'den bir post/put/patch/delete isteği atılığı zaman tarayıcı öncelikle server'ın bu istek tiplerini kabul ettiğini kontrol etmek amacıyla options methoduyla istek atıyor. Eğer options isteği gelince cevap göndermezssek diğer isteği hiç atmıyor ama option gelince doğru header'lar ile cevap verirsek options'ın ardından asıl isteği gönderiyor
+
+
+        case "OPTIONS":
+            res.setHeader(
+                "Access-Control-Allow-Methods",
+                "GET, POST, DELETE, PUT, PATCH, OPTIONS"
+            );
+            res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+            res.end();
+            break;
+
         case "GET":
-            return getRequest(req, res);
+            getRequest(req, res);
+            break;
+
         case "POST":
-            return postRequest(req, res);
+            postRequest(req, res);
+            break;
+
         case "DELETE":
-            return deleteRequest(req, res);
+            deleteRequest(req, res);
+            break;
 
         default:
-            //cevabın durum kodunu belirle
+            // cevab'ın durum kodunu belirle
             res.statusCode = 404;
 
-            //gönderilecek cevaba icerigin tipini headers olarak ekle
+            // gönderlicek cevaba içeirğin tipini headers olarak ekle
             res.setHeader("Content-Type", "application/json");
-            //cevabın içerigini belirle
-            res.write(JSON.stringify({
-                message: "İstek yapılan adres tanımsız",
-            }));
 
-            //client'a cevabı gönder
+            // cevab'ın içeirğini belirleme
+            res.write(
+                JSON.stringify({
+                    message: "İstek yapılan adres tanımsız.",
+                })
+            );
+
+            // client'a cevabı gönders
             res.end();
     }
-
-
-
 });
 
 //2) Belirli porta gelen istekleri dinle
