@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 
         //idli film dizide var mı ?
         const isFound = data.movies.find((i) => i.id === id);
-        console.log(id);
+        //console.log(id);
 
         //dizide eleman yoksa hata fırlat
 

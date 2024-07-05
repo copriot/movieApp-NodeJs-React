@@ -1,6 +1,5 @@
 import React from "react";
-
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import api from "../utilities/api";
 import Loader from "../components/Loader";
@@ -15,26 +14,23 @@ import Error from "../components/Error";
 
 const Detail = () => {
   const navigate = useNavigate();
-
-  // 1) URL'deki parametre olan film idsini al
   const { id } = useParams();
+  const { state } = useLocation(); // useLocation ile state'i alıyoruz
+  const { imageUrl } = state || {}; // state'den imageUrl'i alıyoruz
 
-  // 2) API'dan film verilerini al
   const { data, error, isLoading } = useQuery({
     queryKey: ["movie", id],
     queryFn: () => api.get(`/movies/${id}`).then((res) => res.data),
   });
 
   console.log(data);
-  const movie = data?.data;
-
+  const movie = data;
   const r = +movie?.rating;
-
   const color = r > 9 ? "blue" : r > 7.5 ? "green" : r > 5 ? "orange" : "red";
 
   const handleDelete = () => {
     api
-      .delete(`/movies/${movie?.id}`)
+      .delete(`/movies/${id}`)
       .then((res) => navigate("/"))
       .catch((err) => console.log("hataa", err));
   };
@@ -60,11 +56,7 @@ const Detail = () => {
 
               <div className="flex flex-col gap-10 items-center md:flex-row">
                 <div>
-                  <img
-                    className="rounded-lg"
-                    src={data.image}
-                    alt={data.title}
-                  />
+                  <img className="rounded-lg" src={imageUrl} alt={data.title} />
                 </div>
                 <div className="flex flex-col gap-2">
                   <h1 className="text-2xl font-bold text-rose-600">
@@ -73,15 +65,15 @@ const Detail = () => {
                   <p className="text-green-500 font-semibold">
                     Yıl: {data.year}
                   </p>
-                  <span className=" rounded-full font-semibold ">
+                  <div className="font-semibold">
                     Kullanıcı Puanı:
                     <p
-                      className=" m-2 inline-block rounded-lg p-1 text-white"
+                      className="m-2 inline-block rounded-lg p-1 text-white"
                       style={{ background: color }}
                     >
                       {data.rating}
                     </p>
-                  </span>
+                  </div>
                   <p className="text-yellow-700 font-semibold">
                     Kategoriler: {data.genre.join("-")}
                   </p>
